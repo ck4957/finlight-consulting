@@ -6,3 +6,5 @@ dist/
 # Local visual QA captures
 local-*.png
 source-*.png
+
+!.codex/reference/screenshots/*.png
