@@ -15,28 +15,28 @@ const navItems = [
 
 const services = [
   {
-    image: 'assets/service-leadership.png',
+    image: 'assets/service-original-growth.png',
     title: 'Interim Finance Leadership',
     lead: 'Hands-on finance leadership.',
     body:
       'From day-to-day accounting to FP&A, I manage the full finance function and the team while putting the right controls and processes in place. So you can focus on running the business.',
   },
   {
-    image: 'assets/service-dashboard.jpg',
+    image: 'assets/service-original-growth.png',
     title: 'Data Cleanup & Financial Reporting',
     lead: 'Visible, reliable data you can trust to drive decisions.',
     body:
       'I cut down your reporting time to (or better than) industry standards and clean-up messy, unorganized data into clear, audit-ready insights.',
   },
   {
-    image: 'assets/service-costing.png',
+    image: 'assets/service-original-growth.png',
     title: 'Costing & Margin Fix',
     lead: 'Improve profits without sacrificing volume.',
     body:
       'I dive into your costing, align it to pricing, and roll out margin strategies that hold up as you scale. I build processes that keep them in sync as you move forward.',
   },
   {
-    image: 'assets/service-ai.jpg',
+    image: 'assets/service-original-growth.png',
     title: 'ERP, Automation, & AI Implementation',
     lead: 'Automation that makes sense for your business.',
     body:
@@ -65,12 +65,22 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sent, setSent] = useState(false);
   const [route, setRoute] = useState(getRoute());
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleRoute = () => setRoute(getRoute());
     window.addEventListener('popstate', handleRoute);
     return () => {
       window.removeEventListener('popstate', handleRoute);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 18);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -95,7 +105,7 @@ function App() {
 
   return (
     <>
-      <header className="site-header">
+      <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
         <a className="logo-link" href="#home" aria-label="Finlight Consulting home">
           <img src={asset('assets/logo.png')} alt="Finlight Consulting" />
         </a>
@@ -155,7 +165,7 @@ function App() {
 
         <section className="wave-photo wave-photo-top" aria-hidden="true" style={{ '--wave-bg': `url(${asset('assets/divider-1.png')})` }} />
 
-        <section id="about" className="section about zigzag-section about-blend" style={{ '--section-bg': `url(${asset('assets/divider-2.png')})` }}>
+        <section id="about" className="section about zigzag-section about-blend" style={{ '--section-bg': `url(${asset('assets/divider-1.png')})` }}>
           <div className="about-media reveal image-grow">
             <img className="headshot" src={asset('assets/headshot.jpg')} alt="Grusha headshot" />
             <div className="credential-row">
@@ -183,7 +193,7 @@ function App() {
           </div>
         </section>
 
-        <section id="connect" className="connect-band image-band zigzag-connect" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.25)), url(${asset('assets/connect-bg.jpg')})` }}>
+        <section id="connect" className="connect-band image-band zigzag-connect" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.3)), url(${asset('assets/divider-2.png')})` }}>
           <div className="connect-copy reveal grow-copy">
             <h2>Let's Connect!</h2>
             <p>Just 15 minutes of your time.</p>
@@ -218,7 +228,7 @@ function App() {
       </main>
 
       <footer>
-        <p>© 2025 Finlight Consulting. All Rights Reserved.<br />Email: <a href="mailto:partner@finlightconsulting.com">partner@finlightconsulting.com</a><br />LinkedIn: <a href="https://linkedin.com/in/gbutala">linkedin.com/in/gbutala</a></p>
+        <p>© 2026 Finlight Consulting. All Rights Reserved.<br />Email: <a href="mailto:partner@finlightconsulting.com">partner@finlightconsulting.com</a><br />LinkedIn: <a href="https://linkedin.com/in/gbutala">linkedin.com/in/gbutala</a></p>
         <a className="button" href={route.type === 'home' ? '#home' : pagePath()}>BACK TO TOP</a>
         <p>Based in Vaughan, Serving GTA, Ontario, &amp; Canada-Wide.</p>
       </footer>
@@ -331,10 +341,12 @@ function ArticlePage({ article }) {
       <div className="article-content">
         {(article.content || article.body || []).map((block, index) => <ArticleBlock block={block} key={index} />)}
       </div>
-      <a className="article-next" href={pagePath('my-take/why-choose-finlight')}>
-        <span>Next</span>
-        <strong>Why Finlight</strong>
-      </a>
+      {article.pagination && (
+        <a className={`article-next ${article.pagination.direction || ''}`} href={pagePath(article.pagination.href)}>
+          <span>{article.pagination.label}</span>
+          <strong>{article.pagination.title}</strong>
+        </a>
+      )}
     </article>
   );
 }

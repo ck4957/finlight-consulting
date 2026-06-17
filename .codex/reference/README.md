@@ -7,12 +7,14 @@ These files preserve the original source material used to recreate the Finlight 
 - `screenshots/home-desktop-source.png`: full-page desktop capture of `https://www.finlightconsulting.com/`.
 - `screenshots/home-mobile-source.png`: full-page mobile capture of `https://www.finlightconsulting.com/`.
 - `screenshots/article-finance-hard-source.png`: full-page desktop capture of `https://www.finlightconsulting.com/my-take/finance-shouldnt-feel-hard`.
+- `screenshots/article-why-finlight-source.png`: full-page desktop capture of `https://www.finlightconsulting.com/my-take/why-choose-finlight`.
 
 ## HTML Dumps
 
 - `html/home.html`: exact HTML response from the home page.
 - `html/my-take.html`: exact HTML response from the blog index.
 - `html/article-finance-shouldnt-feel-hard.html`: exact HTML response from the article page.
+- `html/article-why-choose-finlight.html`: exact HTML response from the Why Finlight article page.
 
 ## Use
 

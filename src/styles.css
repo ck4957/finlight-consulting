@@ -122,6 +122,7 @@ img {
 .site-header {
   align-items: center;
   background: rgba(245, 245, 245, 0.94);
+  color: var(--ink);
   display: flex;
   justify-content: space-between;
   left: 0;
@@ -130,7 +131,31 @@ img {
   position: sticky;
   right: 0;
   top: 0;
+  transition: background 280ms ease, box-shadow 280ms ease, color 280ms ease;
   z-index: 10;
+}
+
+.site-header.is-scrolled {
+  background: rgba(0, 0, 0, 0.92);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  color: #fff;
+}
+
+.site-header.is-scrolled a {
+  color: #fff;
+}
+
+.site-header.is-scrolled .button.small {
+  background: #fff;
+  color: #000;
+}
+
+.site-header.is-scrolled .logo-link img {
+  filter: invert(1);
+}
+
+.site-header.is-scrolled .menu-button span {
+  background: #fff;
 }
 
 .logo-link img {
@@ -663,6 +688,12 @@ textarea {
   line-height: 23.4px;
   margin: 92px 0 0 auto;
   max-width: 190px;
+}
+
+.article-next.previous {
+  margin-left: 0;
+  margin-right: auto;
+  max-width: 410px;
 }
 
 .article-next span {

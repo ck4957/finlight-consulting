@@ -11,9 +11,11 @@ Key references:
 - `.codex/reference/screenshots/home-desktop-source.png`: original home page desktop full-page screenshot.
 - `.codex/reference/screenshots/home-mobile-source.png`: original home page mobile full-page screenshot.
 - `.codex/reference/screenshots/article-finance-hard-source.png`: original desktop screenshot for `/my-take/finance-shouldnt-feel-hard`.
+- `.codex/reference/screenshots/article-why-finlight-source.png`: original desktop screenshot for `/my-take/why-choose-finlight`.
 - `.codex/reference/html/home.html`: exact HTML dump from `https://www.finlightconsulting.com/`.
 - `.codex/reference/html/my-take.html`: exact HTML dump from `https://www.finlightconsulting.com/my-take`.
 - `.codex/reference/html/article-finance-shouldnt-feel-hard.html`: exact HTML dump from the article page.
+- `.codex/reference/html/article-why-choose-finlight.html`: exact HTML dump from the Why Finlight article page.
 
 ## Section Mapping
 
@@ -43,6 +45,7 @@ Match the original site closely:
 - Article body text uses `15.6px` with `23.4px` line-height.
 - Article title uses `48px` with `57.6px` line-height on desktop.
 - Source home page uses scroll reveal/scale animation and large blended section imagery with wavy/zig-zag transitions.
+- Source home page uses a dynamic header that turns dark after scrolling.
 - The “What I Offer” service images are circular.
 
 When changing visual sections, compare against the screenshots in `.codex/reference/screenshots/` before committing.

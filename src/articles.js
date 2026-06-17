@@ -6,6 +6,11 @@ export const articles = [
     author: 'Grusha Butala',
     image: 'assets/blog-hard.jpg',
     excerpt: 'Finance should support your business, not slow it down. Let’s make it easy.',
+    pagination: {
+      label: 'Next',
+      title: 'Why Finlight',
+      href: 'my-take/why-choose-finlight',
+    },
     content: [
       { type: 'paragraph', text: 'Have you ever had to ask yourself one or more of these questions?', strong: true },
       {
@@ -50,14 +55,42 @@ export const articles = [
   {
     slug: 'why-choose-finlight',
     title: 'Why Finlight',
-    date: 'June 26, 2025',
+    date: 'Jun 26',
     author: 'Grusha Butala',
     image: 'assets/blog-why.jpg',
-    excerpt: "I integrate into your team with an owner's mindset and build finance that supports real business growth.",
-    body: [
-      "Finlight is built for owners and operators who need more than advice. The work is hands-on: clean the data, improve the process, train the team, and build reporting that lasts.",
-      "That means finance support that sits close to operations, sales, supply chain, and production, not off to the side.",
-      "The goal is practical clarity: better margins, faster closes, cleaner controls, and systems your team can actually use after the engagement ends.",
+    excerpt: 'Because you built your business to grow and I built Finlight to help finance keep up with that growth.',
+    pagination: {
+      label: 'Previous',
+      title: 'Finance Shouldn’t Feel This Hard',
+      href: 'my-take/finance-shouldnt-feel-hard',
+      direction: 'previous',
+    },
+    content: [
+      'Because you built your business to grow and I built Finlight to help finance keep up with that growth.',
+      'Finance is often seen as a stand-alone department that people don’t fully understand, but in reality, it’s the one function that touches everything. Every number, every process, every decision flows through it. Finance connects with every part of the business, whether it’s operations, sales, supply chain, QA, HR, or IT.',
+      {
+        type: 'paragraph',
+        content: [
+          { text: 'This is how I see it:' },
+          { text: ' Finance is the heart of the business. Operations is the heartbeat that keeps it moving. At Finlight, we keep both in sync.', strong: true },
+        ],
+      },
+      {
+        type: 'unordered-list',
+        items: [
+          'Whether we’re automating a process, building reports, or implementing a new system, we keep every department in mind. The tools we build need to work for the whole business because that’s how we can drive real clarity, alignment, and results.',
+          'I integrate into your business like an internal team member. I take the time to understand how things actually run, your operations, your successes, your challenges, and your goals, so we can build finance that supports you, not slows you down. You get hands-on support, fast execution, and clear communication. We own the outcome and stay with it through delivery.',
+          'We know how to leverage AI, automation, and systems and we also know when human insight matters more. This isn’t about fancy dashboards or reporting for the sake of it. It’s about building what helps you and your team act faster and smarter.',
+          'Let Finlight help your team get away from the thought process of “this is how it has always been done.” We work hands-on with your team to re-design processes that make their job easier and processes efficient and effective.',
+        ],
+      },
+      'Whether you need fractional finance leadership, support on a special project, clean data, ERP implementation, help navigating growth, change management, or just want to make sure your day-to-day accounting is accurate, we’ve got you covered.',
+      {
+        type: 'paragraph',
+        content: [
+          { text: 'At Finlight, I care about your bottom line as much as you do. That’s why I work hands-on, on-site with urgency and precision. Whatever it takes to move the needle and make real change that lasts.', strong: true },
+        ],
+      },
     ],
   },
 ];
