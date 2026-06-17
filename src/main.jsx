@@ -76,6 +76,8 @@ function App() {
     };
   }, []);
 
+  useScrollReveal(route.type);
+
   function closeMenu() {
     setMenuOpen(false);
   }
@@ -126,8 +128,8 @@ function App() {
         {route.type === 'article' && <ArticlePage article={activeArticle} />}
         {route.type === 'home' && (
         <>
-        <section className="hero" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.48)), url(${asset('assets/hero-1.png')})` }}>
-          <div className="hero-copy">
+        <section className="hero image-band" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.48)), url(${asset('assets/hero-1.png')})` }}>
+          <div className="hero-copy reveal grow-copy is-visible">
             <h1>Clean Data, Real-Time Dashboards, &amp; Margin Lift of 4 pts in 90 Days.</h1>
             <p>Finance-led ERP Implementation, Automated Reporting, &amp; Tailored Processes.</p>
             <p>Specializing in small and mid-sized Manufacturing &amp; CPG Clients.</p>
@@ -135,11 +137,11 @@ function App() {
           </div>
         </section>
 
-        <section id="services" className="section services">
-          <h2>What I Offer</h2>
-          <div className="service-grid">
+        <section id="services" className="section services blended-section" style={{ '--section-bg': `url(${asset('assets/hero-2.png')})` }}>
+          <h2 className="reveal grow-copy">What I Offer</h2>
+          <div className="service-grid reveal-group">
             {services.map((service) => (
-              <article className="service" key={service.title}>
+              <article className="service reveal" key={service.title}>
                 <img src={asset(service.image)} alt="" />
                 <p className="service-lead">{service.lead}</p>
                 <p>{service.body}</p>
@@ -147,14 +149,14 @@ function App() {
               </article>
             ))}
           </div>
-          <div className="statement">
+          <div className="statement reveal grow-copy">
             <p>I don't just advise.</p>
             <p>I dive in, build, fix, and deliver results.</p>
           </div>
         </section>
 
-        <section id="about" className="section about">
-          <div className="about-media">
+        <section id="about" className="section about blended-section about-blend" style={{ '--section-bg': `url(${asset('assets/divider-1.png')})` }}>
+          <div className="about-media reveal image-grow">
             <img className="headshot" src={asset('assets/headshot.jpg')} alt="Grusha headshot" />
             <div className="credential-row">
               <img src={asset('assets/cpa.png')} alt="CPA" />
@@ -164,7 +166,7 @@ function App() {
               <img src={asset('assets/adp.png')} alt="ADP" />
             </div>
           </div>
-          <div className="about-copy">
+          <div className="about-copy reveal grow-copy">
             <h2>Who I am</h2>
             <p>Hi, I'm Grusha. A CPA, former auditor, and a manufacturing finance expert.</p>
             <p>I'm a hands-on finance leader that delivers results by rolling up my sleeves, getting into the details, while serving the bigger picture through partnering with cross-functional teams.</p>
@@ -181,21 +183,23 @@ function App() {
           </div>
         </section>
 
-        <section id="connect" className="connect-band" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.25)), url(${asset('assets/connect-bg.jpg')})` }}>
-          <div>
+        <section id="connect" className="connect-band image-band" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.25)), url(${asset('assets/connect-bg.jpg')})` }}>
+          <div className="reveal grow-copy">
             <h2>Let's Connect!</h2>
             <p>Just 15 minutes of your time.</p>
           </div>
         </section>
 
-        <section className="section booking">
-          <h2>Book a 15 Minute Call</h2>
-          <CalendlyWidget />
+        <section className="section booking blended-section" style={{ '--section-bg': `url(${asset('assets/divider-2.png')})` }}>
+          <h2 className="reveal grow-copy">Book a 15 Minute Call</h2>
+          <div className="reveal image-grow">
+            <CalendlyWidget />
+          </div>
         </section>
 
         <section id="contact" className="section contact">
-          <h2>Ask Me Anything</h2>
-          <form onSubmit={submitForm}>
+          <h2 className="reveal grow-copy">Ask Me Anything</h2>
+          <form className="reveal" onSubmit={submitForm}>
             <label>Name</label>
             <div className="two-col">
               <input name="firstName" placeholder="First Name" required />
@@ -212,11 +216,11 @@ function App() {
           </form>
         </section>
 
-        <section id="my-take" className="section blog">
-          <h2>If You Ask Me</h2>
+        <section id="my-take" className="section blog blended-section blog-blend" style={{ '--section-bg': `url(${asset('assets/hero-2.png')})` }}>
+          <h2 className="reveal grow-copy">If You Ask Me</h2>
           <div className="post-list">
             {articles.map((post) => (
-              <article className="post" key={post.title}>
+              <article className="post reveal image-grow" key={post.title}>
                 <img src={asset(post.image)} alt={post.title} />
                 <div>
                   <h3>{post.title}</h3>
@@ -265,6 +269,32 @@ function CalendlyWidget() {
       title="Schedule a meeting with Finlight Consulting"
     />
   );
+}
+
+function useScrollReveal(routeType) {
+  useEffect(() => {
+    const elements = [...document.querySelectorAll('.reveal')];
+    if (!elements.length) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.18 }
+    );
+
+    elements.forEach((element, index) => {
+      element.style.setProperty('--reveal-delay', `${Math.min(index % 5, 4) * 90}ms`);
+      observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, [routeType]);
 }
 
 function BlogPage() {
