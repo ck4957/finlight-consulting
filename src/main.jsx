@@ -182,15 +182,12 @@ function App() {
         </section>
 
         <section id="connect" className="connect-band image-band" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.25)), url(${asset('assets/connect-bg.jpg')})` }}>
-          <div className="reveal grow-copy">
+          <div className="connect-copy reveal grow-copy">
             <h2>Let's Connect!</h2>
             <p>Just 15 minutes of your time.</p>
           </div>
-        </section>
-
-        <section className="section booking blended-section" style={{ '--section-bg': `url(${asset('assets/divider-2.png')})` }}>
-          <h2 className="reveal grow-copy">Book a 15 Minute Call</h2>
-          <div className="reveal image-grow">
+          <div className="booking-panel reveal image-grow">
+            <h2>Book a 15 Minute Call</h2>
             <CalendlyWidget />
           </div>
         </section>
