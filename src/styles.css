@@ -411,7 +411,7 @@ p {
   display: grid;
   gap: clamp(34px, 5vw, 86px);
   grid-template-columns: minmax(260px, 0.7fr) minmax(520px, 1fr);
-  min-height: 760px;
+  min-height: 860px;
   padding: 80px clamp(26px, 5vw, 84px);
 }
 
@@ -445,6 +445,7 @@ p {
 
 .booking-panel {
   justify-self: stretch;
+  min-width: 0;
 }
 
 .booking-panel h2 {
@@ -458,8 +459,17 @@ p {
 .calendly-inline-widget {
   background: #fff;
   border: 1px solid #dedede;
-  min-height: 640px;
+  height: 700px;
+  min-height: 700px;
+  overflow: hidden;
   width: 100%;
+}
+
+.calendly-inline-widget iframe {
+  display: block;
+  height: 100% !important;
+  min-height: 700px;
+  width: 100% !important;
 }
 
 .contact {
@@ -841,7 +851,7 @@ footer a:not(.button) {
   }
 
   .connect-band {
-    min-height: 360px;
+    min-height: auto;
     padding: 74px 26px;
   }
 
@@ -911,7 +921,12 @@ footer a:not(.button) {
   }
 
   .calendly-inline-widget {
-    min-height: 620px;
+    height: 680px;
+    min-height: 680px;
+  }
+
+  .calendly-inline-widget iframe {
+    min-height: 680px;
   }
 }
 

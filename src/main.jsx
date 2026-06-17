@@ -256,6 +256,7 @@ function CalendlyWidget() {
     <div
       className="calendly-inline-widget"
       data-url="https://calendly.com/finlightconsulting?hide_gdpr_banner=1"
+      style={{ height: '700px', minWidth: '320px' }}
       title="Schedule a meeting with Finlight Consulting"
     />
   );
