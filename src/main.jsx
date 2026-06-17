@@ -213,22 +213,6 @@ function App() {
           </form>
         </section>
 
-        <section id="my-take" className="section blog blended-section blog-blend" style={{ '--section-bg': `url(${asset('assets/hero-2.png')})` }}>
-          <h2 className="reveal grow-copy">If You Ask Me</h2>
-          <div className="post-list">
-            {articles.map((post) => (
-              <article className="post reveal image-grow" key={post.title}>
-                <img src={asset(post.image)} alt={post.title} />
-                <div>
-                  <h3>{post.title}</h3>
-                  <p>{post.excerpt}</p>
-                  <a href={pagePath(`my-take/${post.slug}`)}>Read more &rarr;</a>
-                  <time>{post.date}</time>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
         </>
         )}
       </main>
