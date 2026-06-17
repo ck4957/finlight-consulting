@@ -245,13 +245,14 @@ p {
 }
 
 .service img {
-  aspect-ratio: 236 / 168;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   height: auto;
   margin-bottom: 26px;
   object-fit: cover;
   transform: scale(0.94);
   transition: transform 1200ms cubic-bezier(0.18, 0.74, 0.2, 1);
-  width: 100%;
+  width: min(100%, 236px);
 }
 
 .service.is-visible img {
