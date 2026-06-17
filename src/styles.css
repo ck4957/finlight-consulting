@@ -298,18 +298,37 @@ p {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.service img {
+.service-image {
   aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  height: auto;
+  border-radius: 0;
   margin-bottom: 26px;
-  object-fit: cover;
+  mask:
+    radial-gradient(circle at 32% 32%, #000 0 35%, transparent 35.5%),
+    radial-gradient(circle at 68% 32%, #000 0 35%, transparent 35.5%),
+    radial-gradient(circle at 32% 68%, #000 0 35%, transparent 35.5%),
+    radial-gradient(circle at 68% 68%, #000 0 35%, transparent 35.5%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+  overflow: hidden;
   transform: scale(0.94);
   transition: transform 1200ms cubic-bezier(0.18, 0.74, 0.2, 1);
   width: min(100%, 236px);
+  -webkit-mask:
+    radial-gradient(circle at 32% 32%, #000 0 35%, transparent 35.5%),
+    radial-gradient(circle at 68% 32%, #000 0 35%, transparent 35.5%),
+    radial-gradient(circle at 32% 68%, #000 0 35%, transparent 35.5%),
+    radial-gradient(circle at 68% 68%, #000 0 35%, transparent 35.5%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
 }
 
-.service.is-visible img {
+.service img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.service.is-visible .service-image {
   transform: scale(1);
 }
 
@@ -796,10 +815,6 @@ footer a:not(.button) {
     gap: 40px;
   }
 
-  .service img {
-    height: auto;
-  }
-
   .about h2,
   footer p:last-child {
     text-align: left;
@@ -969,7 +984,7 @@ footer a:not(.button) {
   .reveal,
   .grow-copy,
   .image-grow,
-  .service img,
+  .service-image,
   .post img,
   .image-band::before,
   .blended-section::before {

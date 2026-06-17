@@ -22,21 +22,21 @@ const services = [
       'From day-to-day accounting to FP&A, I manage the full finance function and the team while putting the right controls and processes in place. So you can focus on running the business.',
   },
   {
-    image: 'assets/service-original-growth.png',
+    image: 'assets/service-dashboard.jpg',
     title: 'Data Cleanup & Financial Reporting',
     lead: 'Visible, reliable data you can trust to drive decisions.',
     body:
       'I cut down your reporting time to (or better than) industry standards and clean-up messy, unorganized data into clear, audit-ready insights.',
   },
   {
-    image: 'assets/service-original-growth.png',
+    image: 'assets/service-costing.png',
     title: 'Costing & Margin Fix',
     lead: 'Improve profits without sacrificing volume.',
     body:
       'I dive into your costing, align it to pricing, and roll out margin strategies that hold up as you scale. I build processes that keep them in sync as you move forward.',
   },
   {
-    image: 'assets/service-original-growth.png',
+    image: 'assets/service-ai.jpg',
     title: 'ERP, Automation, & AI Implementation',
     lead: 'Automation that makes sense for your business.',
     body:
@@ -150,10 +150,12 @@ function App() {
           <div className="service-grid reveal-group">
             {services.map((service) => (
               <article className="service reveal" key={service.title}>
-                <img src={asset(service.image)} alt="" />
+                <div className="service-image">
+                  <img src={asset(service.image)} alt="" />
+                </div>
+                <h3>{service.title}</h3>
                 <p className="service-lead">{service.lead}</p>
                 <p>{service.body}</p>
-                <h3>{service.title}</h3>
               </article>
             ))}
           </div>
