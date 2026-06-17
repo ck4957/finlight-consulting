@@ -6,11 +6,11 @@ import './styles.css';
 const asset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;
 
 const navItems = [
-  ['Home', '#home'],
-  ['Services', '#services'],
-  ['About', '#about'],
-  ['Contact', '#contact'],
-  ['My Take', '#my-take'],
+  ['Home', pagePath()],
+  ['Services', `${pagePath()}#services`],
+  ['About', `${pagePath()}#about`],
+  ['Contact', `${pagePath()}#contact`],
+  ['My Take', pagePath('my-take')],
 ];
 
 const services = [
@@ -68,10 +68,8 @@ function App() {
 
   useEffect(() => {
     const handleRoute = () => setRoute(getRoute());
-    window.addEventListener('hashchange', handleRoute);
     window.addEventListener('popstate', handleRoute);
     return () => {
-      window.removeEventListener('hashchange', handleRoute);
       window.removeEventListener('popstate', handleRoute);
     };
   }, []);
@@ -103,9 +101,9 @@ function App() {
         </a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navItems.map(([label, href]) => (
-            <a key={label} href={label === 'My Take' ? '#/my-take' : href}>{label}</a>
+            <a key={label} href={href}>{label}</a>
           ))}
-          <a className="button small" href="#contact">Let's Connect</a>
+          <a className="button small" href={`${pagePath()}#contact`}>Let's Connect</a>
         </nav>
         <button className="menu-button" type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen}>
           <span />
@@ -117,9 +115,9 @@ function App() {
       {menuOpen && (
         <nav className="mobile-nav" aria-label="Mobile navigation">
           {navItems.map(([label, href]) => (
-            <a key={label} href={label === 'My Take' ? '#/my-take' : href} onClick={closeMenu}>{label}</a>
+            <a key={label} href={href} onClick={closeMenu}>{label}</a>
           ))}
-          <a className="button" href="#contact" onClick={closeMenu}>Let's Connect</a>
+          <a className="button" href={`${pagePath()}#contact`} onClick={closeMenu}>Let's Connect</a>
         </nav>
       )}
 
@@ -225,7 +223,7 @@ function App() {
                 <div>
                   <h3>{post.title}</h3>
                   <p>{post.excerpt}</p>
-                  <a href={`#/my-take/${post.slug}`}>Read more &rarr;</a>
+                  <a href={pagePath(`my-take/${post.slug}`)}>Read more &rarr;</a>
                   <time>{post.date}</time>
                 </div>
               </article>
@@ -238,7 +236,7 @@ function App() {
 
       <footer>
         <p>© 2025 Finlight Consulting. All Rights Reserved.<br />Email: <a href="mailto:partner@finlightconsulting.com">partner@finlightconsulting.com</a><br />LinkedIn: <a href="https://linkedin.com/in/gbutala">linkedin.com/in/gbutala</a></p>
-        <a className="button" href="#home">BACK TO TOP</a>
+        <a className="button" href={route.type === 'home' ? '#home' : pagePath()}>BACK TO TOP</a>
         <p>Based in Vaughan, Serving GTA, Ontario, &amp; Canada-Wide.</p>
       </footer>
     </>
@@ -246,10 +244,19 @@ function App() {
 }
 
 function getRoute() {
-  const hash = window.location.hash.replace(/^#/, '');
-  if (hash === '/my-take') return { type: 'blog' };
-  if (hash.startsWith('/my-take/')) return { type: 'article', slug: hash.replace('/my-take/', '') };
+  const base = new URL(import.meta.env.BASE_URL, window.location.origin).pathname.replace(/\/$/, '');
+  let path = window.location.pathname;
+  if (base && path.startsWith(base)) path = path.slice(base.length) || '/';
+  path = path.replace(/\/$/, '') || '/';
+  if (path === '/my-take') return { type: 'blog' };
+  if (path.startsWith('/my-take/')) return { type: 'article', slug: path.replace('/my-take/', '') };
   return { type: 'home' };
+}
+
+function pagePath(path = '') {
+  const base = import.meta.env.BASE_URL;
+  const normalized = path.replace(/^\/+/, '').replace(/\/+$/, '');
+  return `${base}${normalized}`.replace(/\/{2,}/g, '/');
 }
 
 function CalendlyWidget() {
@@ -300,7 +307,7 @@ function useScrollReveal(routeType) {
 function BlogPage() {
   return (
     <section className="section blog blog-page">
-      <a className="back-link" href="#home">Home</a>
+      <a className="back-link" href={pagePath()}>Home</a>
       <h1>Finance Insights for Real Business Problems</h1>
       <p className="blog-intro">Practical finance, costing, and ERP insights for small and mid-sized businesses. Built for leaders tired of guesswork and ready for clarity.</p>
       <div className="post-list">
@@ -310,7 +317,7 @@ function BlogPage() {
             <div>
               <h2>{post.title}</h2>
               <p>{post.excerpt}</p>
-              <a href={`#/my-take/${post.slug}`}>Read more &rarr;</a>
+              <a href={pagePath(`my-take/${post.slug}`)}>Read more &rarr;</a>
               <time>{post.date}</time>
             </div>
           </article>
@@ -324,7 +331,7 @@ function ArticlePage({ article }) {
   if (!article) {
     return (
       <section className="section article-page">
-        <a className="back-link" href="#/my-take">Back to My Take</a>
+        <a className="back-link" href={pagePath('my-take')}>Back to My Take</a>
         <h1>Article not found</h1>
       </section>
     );
@@ -332,7 +339,7 @@ function ArticlePage({ article }) {
 
   return (
     <article className="section article-page">
-      <a className="back-link" href="#/my-take">Back to My Take</a>
+      <a className="back-link" href={pagePath('my-take')}>Back to My Take</a>
       <img className="article-hero" src={asset(article.image)} alt={article.title} />
       <time>{article.date}</time>
       <h1>{article.title}</h1>
