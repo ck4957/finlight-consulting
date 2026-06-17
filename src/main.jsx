@@ -338,13 +338,51 @@ function ArticlePage({ article }) {
 
   return (
     <article className="section article-page">
-      <a className="back-link" href={pagePath('my-take')}>Back to My Take</a>
-      <img className="article-hero" src={asset(article.image)} alt={article.title} />
-      <time>{article.date}</time>
+      <div className="article-meta">
+        <time>{article.date}</time>
+        <span>Written By <a href={pagePath('my-take')}>{article.author || 'Grusha Butala'}</a></span>
+      </div>
       <h1>{article.title}</h1>
-      {article.body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      <div className="article-content">
+        {(article.content || article.body || []).map((block, index) => <ArticleBlock block={block} key={index} />)}
+      </div>
+      <a className="article-next" href={pagePath('my-take/why-choose-finlight')}>
+        <span>Next</span>
+        <strong>Why Finlight</strong>
+      </a>
     </article>
   );
+}
+
+function ArticleBlock({ block }) {
+  if (typeof block === 'string') return <p>{block}</p>;
+
+  if (block.type === 'ordered-list' || block.type === 'unordered-list') {
+    const ListTag = block.type === 'ordered-list' ? 'ol' : 'ul';
+    return (
+      <ListTag>
+        {block.items.map((item, index) => (
+          <li key={index}>
+            <p>{renderRichText(item)}</p>
+          </li>
+        ))}
+      </ListTag>
+    );
+  }
+
+  return <p className={block.strong ? 'strong-paragraph' : undefined}>{renderRichText(block.content || block.text)}</p>;
+}
+
+function renderRichText(content) {
+  if (typeof content === 'string') return content;
+  if (!Array.isArray(content)) return null;
+
+  return content.map((part, index) => {
+    let value = part.text;
+    if (part.em) value = <em>{value}</em>;
+    if (part.strong) value = <strong>{value}</strong>;
+    return <React.Fragment key={index}>{value}</React.Fragment>;
+  });
 }
 
 createRoot(document.getElementById('root')).render(<App />);

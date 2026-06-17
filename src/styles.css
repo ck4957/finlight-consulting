@@ -539,8 +539,7 @@ textarea {
   padding-top: 130px;
 }
 
-.blog-page h1,
-.article-page h1 {
+.blog-page h1 {
   color: var(--muted);
   font-size: clamp(44px, 5vw, 72px);
   font-weight: 400;
@@ -577,29 +576,95 @@ textarea {
 }
 
 .article-page {
-  max-width: 920px;
-  padding-top: 130px;
+  max-width: 1407px;
+  padding: 20px clamp(22px, 6.88vw, 99px) 130px;
 }
 
-.article-page time {
+.article-page h1 {
+  color: var(--ink);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 57.6px;
+  margin: 18px 0 16px;
+  text-align: left;
+}
+
+.article-meta {
+  align-items: center;
+  color: var(--ink);
+  display: flex;
+  font-size: 12px;
+  gap: 28px;
+  line-height: 18px;
+  margin-bottom: 14px;
+}
+
+.article-meta time,
+.article-meta a {
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.article-content {
+  color: var(--ink);
+  font-size: 15.6px;
+  line-height: 23.4px;
+}
+
+.article-content p,
+.article-content li {
+  font-size: 15.6px;
+  line-height: 23.4px;
+}
+
+.article-content > p {
+  margin: 0 0 15.6px;
+}
+
+.article-content ol,
+.article-content ul {
+  margin: 0 0 23.4px 40px;
+  padding: 0;
+}
+
+.article-content li {
+  margin: 0 0 7.8px;
+  padding-left: 0;
+}
+
+.article-content li p {
+  margin: 0;
+}
+
+.article-content strong,
+.strong-paragraph {
+  font-weight: 700;
+}
+
+.article-content em {
+  font-style: italic;
+}
+
+.article-next {
   color: var(--muted);
   display: block;
-  font-size: 15px;
-  margin: 32px 0 0;
-  text-align: center;
+  font-size: 15.6px;
+  line-height: 23.4px;
+  margin: 92px 0 0 auto;
+  max-width: 190px;
 }
 
-.article-hero {
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  width: 100%;
+.article-next span {
+  display: block;
 }
 
-.article-page p {
-  font-size: 20px;
-  line-height: 1.65;
-  margin: 0 auto 24px;
-  max-width: 760px;
+.article-next strong {
+  color: var(--ink);
+  display: block;
+  font-size: 26.4px;
+  font-weight: 400;
+  line-height: 26.4px;
 }
 
 .post p,
@@ -816,8 +881,33 @@ footer a:not(.button) {
     font-size: 13px;
   }
 
-  .article-page p {
-    font-size: 16px;
+  .article-page {
+    padding: 76px 26px 96px;
+  }
+
+  .article-page h1 {
+    line-height: 1.14;
+  }
+
+  .article-meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .article-content p,
+  .article-content li {
+    font-size: 15.6px;
+    line-height: 23.4px;
+  }
+
+  .article-content ol,
+  .article-content ul {
+    margin-left: 24px;
+  }
+
+  .article-next {
+    margin-left: 0;
   }
 
   .calendly-inline-widget {
