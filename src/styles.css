@@ -60,14 +60,16 @@ img {
 }
 
 .image-band,
-.blended-section {
+.blended-section,
+.zigzag-section {
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
 
 .image-band::before,
-.blended-section::before {
+.blended-section::before,
+.zigzag-section::before {
   background: inherit;
   background-position: center;
   background-size: cover;
@@ -90,8 +92,18 @@ img {
     var(--section-bg);
 }
 
+.zigzag-section::before {
+  background-image:
+    linear-gradient(rgba(245, 245, 245, 0.58), rgba(245, 245, 245, 0.82)),
+    var(--section-bg);
+  clip-path: polygon(0 5%, 14% 0, 34% 6%, 52% 1%, 72% 7%, 100% 2%, 100% 94%, 82% 100%, 62% 94%, 42% 100%, 20% 94%, 0 100%);
+  inset: -4% 0;
+  opacity: 0.72;
+}
+
 .image-band::after,
-.blended-section::after {
+.blended-section::after,
+.zigzag-section::after {
   background:
     linear-gradient(to bottom, rgba(245, 245, 245, 0.92), rgba(245, 245, 245, 0) 12%, rgba(245, 245, 245, 0) 82%, rgba(245, 245, 245, 0.92)),
     linear-gradient(90deg, rgba(245, 245, 245, 0.22), rgba(245, 245, 245, 0), rgba(245, 245, 245, 0.22));
@@ -191,6 +203,7 @@ img {
 
 .hero::after {
   background:
+    radial-gradient(130% 24% at 50% 100%, var(--paper) 0 48%, rgba(245, 245, 245, 0) 50%),
     linear-gradient(to bottom, rgba(245, 245, 245, 0) 72%, var(--paper) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.18), transparent 36%, transparent 64%, rgba(0, 0, 0, 0.12));
 }
@@ -228,6 +241,22 @@ p {
   margin: 0 auto;
   max-width: var(--max);
   padding: 88px clamp(22px, 4.2vw, 64px);
+}
+
+.services,
+.about {
+  max-width: none;
+  padding-left: clamp(36px, 6vw, 116px);
+  padding-right: clamp(36px, 6vw, 116px);
+}
+
+.services {
+  background:
+    radial-gradient(115% 32% at 50% 0, var(--paper) 0 45%, rgba(245, 245, 245, 0) 47%),
+    linear-gradient(145deg, rgba(245, 245, 245, 0.76), rgba(170, 226, 229, 0.56) 42%, rgba(245, 245, 245, 0.82) 86%);
+  clip-path: polygon(0 0, 16% 4%, 34% 0, 51% 5%, 70% 0, 100% 4%, 100% 96%, 78% 100%, 58% 95%, 36% 100%, 16% 95%, 0 100%);
+  margin-top: -44px;
+  padding-top: 112px;
 }
 
 .section h2 {
@@ -286,6 +315,40 @@ p {
   text-align: center;
 }
 
+.wave-photo {
+  background-image:
+    linear-gradient(to bottom, rgba(245, 245, 245, 0.12), rgba(245, 245, 245, 0.08)),
+    var(--wave-bg);
+  background-position: center;
+  background-size: cover;
+  clip-path: polygon(0 8%, 14% 2%, 35% 8%, 52% 2%, 74% 9%, 100% 3%, 100% 92%, 82% 98%, 62% 92%, 42% 98%, 20% 92%, 0 98%);
+  min-height: clamp(420px, 48vw, 720px);
+  position: relative;
+  z-index: 1;
+}
+
+.wave-photo::before,
+.wave-photo::after {
+  content: "";
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.wave-photo::before {
+  background: radial-gradient(130% 70% at 50% 0, var(--paper) 0 42%, rgba(245, 245, 245, 0) 44%);
+  height: 30%;
+  top: 0;
+}
+
+.wave-photo::after {
+  background: radial-gradient(130% 70% at 50% 100%, var(--paper) 0 42%, rgba(245, 245, 245, 0) 44%);
+  bottom: 0;
+  height: 30%;
+}
+
 .about {
   align-items: start;
   display: grid;
@@ -294,7 +357,7 @@ p {
 }
 
 .about-blend::before {
-  opacity: 0.22;
+  opacity: 0.38;
 }
 
 .about h2 {
@@ -354,8 +417,15 @@ p {
 
 .connect-band::after {
   background:
-    linear-gradient(to bottom, var(--paper), rgba(245, 245, 245, 0.08) 25%, rgba(245, 245, 245, 0.08) 70%, var(--paper)),
+    radial-gradient(130% 18% at 50% 0, var(--paper) 0 48%, rgba(245, 245, 245, 0) 50%),
+    radial-gradient(130% 18% at 50% 100%, var(--paper) 0 48%, rgba(245, 245, 245, 0) 50%),
+    linear-gradient(to bottom, rgba(245, 245, 245, 0.96), rgba(245, 245, 245, 0.08) 25%, rgba(245, 245, 245, 0.08) 70%, var(--paper)),
     linear-gradient(90deg, rgba(245, 245, 245, 0.75), rgba(245, 245, 245, 0.2));
+}
+
+.zigzag-connect {
+  clip-path: polygon(0 5%, 18% 0, 38% 6%, 58% 0, 78% 6%, 100% 1%, 100% 96%, 80% 100%, 60% 95%, 40% 100%, 20% 95%, 0 100%);
+  margin-top: -38px;
 }
 
 .connect-band h2 {

@@ -135,7 +135,7 @@ function App() {
           </div>
         </section>
 
-        <section id="services" className="section services blended-section" style={{ '--section-bg': `url(${asset('assets/hero-2.png')})` }}>
+        <section id="services" className="section services zigzag-section" style={{ '--section-bg': `url(${asset('assets/hero-2.png')})` }}>
           <h2 className="reveal grow-copy">What I Offer</h2>
           <div className="service-grid reveal-group">
             {services.map((service) => (
@@ -153,7 +153,9 @@ function App() {
           </div>
         </section>
 
-        <section id="about" className="section about blended-section about-blend" style={{ '--section-bg': `url(${asset('assets/divider-1.png')})` }}>
+        <section className="wave-photo wave-photo-top" aria-hidden="true" style={{ '--wave-bg': `url(${asset('assets/divider-1.png')})` }} />
+
+        <section id="about" className="section about zigzag-section about-blend" style={{ '--section-bg': `url(${asset('assets/divider-2.png')})` }}>
           <div className="about-media reveal image-grow">
             <img className="headshot" src={asset('assets/headshot.jpg')} alt="Grusha headshot" />
             <div className="credential-row">
@@ -181,7 +183,7 @@ function App() {
           </div>
         </section>
 
-        <section id="connect" className="connect-band image-band" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.25)), url(${asset('assets/connect-bg.jpg')})` }}>
+        <section id="connect" className="connect-band image-band zigzag-connect" style={{ backgroundImage: `linear-gradient(90deg, rgba(245, 245, 245, 0.88), rgba(245, 245, 245, 0.25)), url(${asset('assets/connect-bg.jpg')})` }}>
           <div className="connect-copy reveal grow-copy">
             <h2>Let's Connect!</h2>
             <p>Just 15 minutes of your time.</p>
